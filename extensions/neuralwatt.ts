@@ -311,7 +311,7 @@ function buildModels(
       reasoning,
       thinkingLevelMap: reasoning ? effort.get(m.id) : undefined,
       compat: Object.keys(compat).length ? compat : undefined,
-      input: ["text"],
+      input: caps?.vision === true ? ["text", "image"] : ["text"],
       contextWindow: m.max_model_len ?? DEFAULT_CONTEXT_WINDOW,
       maxTokens: m.metadata?.limits?.max_output_tokens ?? DEFAULT_MAX_OUTPUT_TOKENS,
       cost,
@@ -445,6 +445,7 @@ interface ApiModel {
       reasoning?: boolean;
       reasoning_effort?: boolean;
       developer_role?: boolean;
+      vision?: boolean;
     };
     pricing?: {
       pricing_tbd?: boolean;
